@@ -1,0 +1,64 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --light-green: #5cc19f;
+  --dark-green: #188366;
+  height: 100%;
+}
+
+body {
+  background-color: #141414;
+  /* font-family: "Almarai"; */
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  height: 100%;
+}
+.text-light-green {
+  color: var(--light-green);
+}
+.text-dark-green {
+  color: var(--dark-green);
+}
+.default-layout .nav-link.active {
+  color: var(--light-green);
+}
+.default-layout .nav-link {
+  color: var(--dark-green);
+  font-weight: 400;
+  font-size: 20px;
+}
+#__nuxt {
+  height: 100%;
+}
+button.navbar-toggler {
+  padding: 0px;
+}
+button.navbar-toggler svg {
+  color: var(--dark-green);
+}
+/* .navbar {
+  background-color: #141414 !important;
+} */
+
+/* ul.navbar-nav {
+  width: 72rem;
+  justify-content: center;
+} */
+
+@media (max-width: 991px) {
+  .navbar-brand div {
+    padding-left: 0px !important;
+  }
+  div#navbarNavAltMarkup ul.navbar-nav {
+    align-items: end;
+    border: 2px solid var(--dark-green);
+    border-radius: 16px;
+    padding-right: 11px;
+  }
+}
+@media (min-width: 991px) {
+  .navbar-collapse {
+    display: flex;
+    justify-content: center;
+  }
+}
