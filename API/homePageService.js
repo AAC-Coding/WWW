@@ -1,19 +1,34 @@
 export default {
     async get_initial_chat() {
-        return await useAsyncData(() => $fetch('http://localhost:8001/api/chat/initial', {
+        const config = useRuntimeConfig()
+        return await $fetch('http://localhost:8001/api/chat/initial', {
             method: 'GET',
             headers: {
-                'X-API-KEY': '64540a2224c7cf38dc0c696bd40da2ff'
+                'X-API-KEY': config.key
             }
-        }))
+        })
     },
     async post_message(data) {
-        return await useAsyncData(() => $fetch('chat', {
+        return await $fetch('http://localhost:8001/api/chat', {
             method: 'POST',
-            params: {
+            headers: {
+                'X-API-KEY': config.key
+            },
+            body: {
                 user_id: data.user_id,
-                content: data.message
+                content: data.content
             }
-        }))
+        })
+    },
+    async final_message(data) {
+        return await $fetch('http://localhost:8001/api/final-message', {
+            method: 'POST',
+            headers: {
+                'X-API-KEY': config.key
+            },
+            body: {
+                user_id: data.user_id,
+            }
+        })
     }
 }

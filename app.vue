@@ -1,8 +1,14 @@
+<script setup>
+</script>
 <template>
   <div class="h-100">
-    <nav class="default-layout navbar navbar-expand-lg bg-black pt-4 pb-4 d-flex justify-content-center">
-      <nuxt-link class="navbar-brand" href="#">
-          <div class="ps-5">
+     <NuxtLayout>
+      <NuxtPage/>
+    </NuxtLayout>
+    <!-- <nav :class="{'default-layout navbar navbar-expand-lg bg-black pt-4 pb-4': true, 'add-border': addBorder}">
+      <div class="container-fluid d-flex justify-content-center ps-5 pe-5">
+        <nuxt-link class="navbar-brand" href="#">
+          <div class="">
              <img
               src="~assets/images/alca.png"
               width="148"
@@ -11,7 +17,6 @@
           </div>
          
         </nuxt-link>
-      <div class="container-fluid d-flex justify-content-center">
         <button 
           class="navbar-toggler" 
           type="button" 
@@ -19,7 +24,8 @@
           data-bs-target="#navbarNavAltMarkup" 
           aria-controls="navbarNavAltMarkup" 
           aria-expanded="false" 
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+          @click="() => addBorder = !addBorder">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             width="32" 
@@ -50,7 +56,7 @@
               </nuxt-link>
             </li>
             <li class="nav-item me-2">
-              <nuxt-link class="nav-link" > SOLUTIONS </nuxt-link>
+              <nuxt-link class="nav-link" to="/" > SOLUTIONS </nuxt-link>
             </li>
             <li class="nav-item me-2">
               <nuxt-link class="nav-link"> BLOG </nuxt-link>
@@ -61,7 +67,6 @@
           </ul>
         </div>
       </div>
-  </nav>
-  <NuxtPage/>
+  </nav> -->
   </div>
 </template>
