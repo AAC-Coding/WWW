@@ -8,7 +8,6 @@
 
 body {
   background-color: #141414;
-  /* font-family: "Almarai"; */
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
   height: 100%;
@@ -36,24 +35,38 @@ button.navbar-toggler {
 button.navbar-toggler svg {
   color: var(--dark-green);
 }
-/* .navbar {
-  background-color: #141414 !important;
-} */
-
-/* ul.navbar-nav {
-  width: 72rem;
-  justify-content: center;
-} */
+div#navbarNavAltMarkup {
+  padding-right: 10rem;
+}
 
 @media (max-width: 991px) {
   .navbar-brand div {
     padding-left: 0px !important;
   }
-  div#navbarNavAltMarkup ul.navbar-nav {
-    align-items: end;
-    border: 2px solid var(--dark-green);
-    border-radius: 16px;
-    padding-right: 11px;
+  #navbarNavAltMarkup {
+    padding-right: 0 !important;
+    margin-top: 1rem;
+  }
+  #navbarNavAltMarkup ul.navbar-nav {
+    border-top: 2px solid var(--dark-green);
+    border-bottom: 2px solid var(--dark-green);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    display: flex;
+    align-items: center;
+  }
+  nav.default-layout.add-border {
+    padding-bottom: 0 !important;
+  }
+  .container-fluid {
+    padding: 0px !important;
+    justify-content: space-between !important;
+  }
+  .navbar-brand {
+    padding-left: 15px;
+  }
+  .navbar-toggler {
+    padding-right: 15px !important;
   }
 }
 @media (min-width: 991px) {

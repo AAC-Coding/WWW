@@ -18,8 +18,13 @@ export default defineNuxtConfig({
           ],
         },
     },
-    privateRuntimeConfig: {
-        API_URL: process.env.API_URL
+    runtimeConfig: {
+      // The private keys which are only available within server-side
+      // Keys within public, will be also exposed to the client-side
+      public: {
+        apiBase: process.env.API_URL,
+        key: process.env.API_KEY
+      }
     },
     css: ["~/assets/main.css"]
     
