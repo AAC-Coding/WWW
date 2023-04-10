@@ -10,9 +10,9 @@
     let firstInitialChatRequest = ref([])
     onMounted(async () => {
         const data = await homePageService.get_initial_chat()
-        const {text, user_id} = data
+        const {text, token} = data
         conversation.value.push({chatbot: text})
-        localStorage.setItem('user_id', user_id)
+        localStorage.setItem('user_id', token)
         isLoading.value = false
         
         firstInitialChatRequest.value.push(text.slice(0, 23))

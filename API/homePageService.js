@@ -1,7 +1,7 @@
 export default {
     async get_initial_chat() {
         const config = useRuntimeConfig()
-        return await $fetch('http://localhost:8001/api/chat/initial', {
+        return await $fetch(`${config.apiBase}/api/chat/initial`, {
             method: 'GET',
             headers: {
                 'X-API-KEY': config.key
@@ -9,7 +9,7 @@ export default {
         })
     },
     async post_message(data) {
-        return await $fetch('http://localhost:8001/api/chat', {
+        return await $fetch(`${config.apiBase}/api/chat`, {
             method: 'POST',
             headers: {
                 'X-API-KEY': config.key
@@ -21,7 +21,7 @@ export default {
         })
     },
     async final_message(data) {
-        return await $fetch('http://localhost:8001/api/final-message', {
+        return await $fetch(`${config.apiBase}api/final-message`, {
             method: 'POST',
             headers: {
                 'X-API-KEY': config.key
