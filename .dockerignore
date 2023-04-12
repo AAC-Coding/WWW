@@ -1,0 +1,10 @@
+node_modules
+.github
+dist
+Makefile
+.gitignore
+*keys.ts
+*.keys.json
+.git
+Dockerfile
+.env

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  www:
+    container_name: www
+    image: www
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - API_URL=${API_URL}
+        - API_KEY=${API_KEY} 
+
+    ports:
+      - 3000:3000
