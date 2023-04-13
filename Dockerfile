@@ -1,11 +1,19 @@
-# Dockerfile
 FROM node:18-alpine
 
-WORKDIR /app
-COPY . /app
-RUN npm cache clean --force && npm install
-RUN source .env && npm run build
+RUN mkdir -p /var/www/dockerize-nuxt/nuxt-app
+WORKDIR /var/www/dockerize-nuxt/nuxt-app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "start" ]
+ENV NUXT_HOST=0.0.0.0
+
+ENV NUXT_PORT=3000
+
+CMD [ "npm", "start" ]

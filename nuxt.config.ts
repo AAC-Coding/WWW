@@ -26,6 +26,13 @@ export default defineNuxtConfig({
         key: process.env["API_KEY"]
       }
     },
-    css: ["~/assets/main.css"]
+    css: ["~/assets/main.css"],
+    layouts: {
+      path: 'layouts'
+    },
+    server: {
+      host: process.env.NUXT_HOST,
+      port: process.env.NUXT_PORT,
+    },
     
 })
