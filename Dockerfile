@@ -14,5 +14,5 @@ RUN source .env && npm run build
 FROM nginx:1.23-alpine
 COPY nginx.conf /etc/nginx/conf.d
 
-COPY --from=builder /app/dist/www /usr/share/nginx/html
+COPY --from=builder /app/.output /usr/share/nginx/html
 EXPOSE 80
