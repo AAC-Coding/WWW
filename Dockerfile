@@ -33,7 +33,7 @@ FROM nginx:1.23-alpine
 RUN rm -rf /etc/nginx/conf.d/default.conf
 
 # Copy the built files from the first stage to the second stage
-COPY --from=builder /var/www/dist /usr/share/nginx/html
+COPY --from=builder /var/www /usr/share/nginx/html
 
 # Copy the nginx.conf file
 COPY nginx.conf /etc/nginx/conf.d
