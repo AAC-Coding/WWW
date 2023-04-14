@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  www:
+    container_name: www
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        COMMIT_HASH: ${COMMIT_HASH}
+    environment:
+      - API_URL=${API_URL}
+      - API_KEY=${API_KEY}
+    ports:
+      - '4000:4000'
+    command: npm run start
+    restart: always
+    labels:
+      - "com.docker.compose.build=www"
+
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+    depends_on:
+      - www
