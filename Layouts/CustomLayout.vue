@@ -1,6 +1,7 @@
 <script setup>
     import {ref} from 'vue'
     let addBorder = ref(false)
+    let isHover = ref(false)
 </script>
 <template>
     <div>
@@ -55,7 +56,14 @@
                     </nuxt-link>
                     </li>
                     <li class="nav-item me-2">
-                    <nuxt-link class="nav-link" to="/" > SOLUTIONS </nuxt-link>
+                    <nuxt-link 
+                        class="nav-link" 
+                        to="/" 
+                        @mouseenter="isHover = true"
+                        @mouseleave="isHover = false"
+                    > 
+                        SOLUTIONS 
+                    </nuxt-link>
                     </li>
                     <li class="nav-item me-2">
                     <nuxt-link class="nav-link"> BLOG </nuxt-link>
@@ -67,6 +75,7 @@
                 </div>
             </div>
         </nav>
+        <hover-menu v-if = "isHover"/>
         <div class="slot">
             <slot/>
         </div>
