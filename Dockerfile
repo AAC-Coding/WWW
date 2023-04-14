@@ -20,3 +20,12 @@ ENV NUXT_PORT=4000
 
 # Set a label for the commit hash
 LABEL commit_hash=$COMMIT_HASH
+
+
+#-----------------#
+
+FROM nginx:1.23-alpine
+
+RUN rm -rf /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d
