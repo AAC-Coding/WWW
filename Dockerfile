@@ -1,6 +1,6 @@
 ARG COMMIT_HASH
 
-FROM node:18-alpine
+FROM node:18-alpine as builder
 
 # Set working directory
 WORKDIR /var/www
