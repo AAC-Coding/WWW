@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:18-alpine as building
 
 RUN apk add --update nodejs npm
 
@@ -11,10 +11,9 @@ EXPOSE 3000
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 RUN source .env && npm run build
+RUN npm run generate
 
-FROM nginx:1.23-alpine
-COPY nginx.conf /etc/nginx/conf.d
-COPY --from=builder /app/.nuxt/dist/server /usr/share/nginx/html
+FROM nginx:1.23-alpine AS production
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=building /app/dist /usr/share/nginx/html
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
