@@ -8,6 +8,7 @@ export default defineNuxtConfig({
             "test": "~/assets/images",
         }
     },
+    target: 'static',
     app: {
         head: {
           script: [
@@ -27,6 +28,9 @@ export default defineNuxtConfig({
       }
     },
     css: ["~/assets/main.css"],
+    layouts: {
+      path: 'layouts'
+    },
     server: {
       host: process.env.NUXT_HOST,
       port: process.env.NUXT_PORT,
