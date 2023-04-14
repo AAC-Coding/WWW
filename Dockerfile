@@ -11,7 +11,7 @@ RUN npm cache clean --force && npm install
 
 # Copy application files and build
 COPY . .
-RUN source .prod.env && npm run build
+RUN source .env && npm run build
 
 # Expose port and set environment variables
 EXPOSE 4000
