@@ -15,7 +15,7 @@ RUN npm run build
 
 # Expose port and set environment variables
 EXPOSE 4000
-COPY .env .
+COPY config.env .
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=4000
 ENV API_URL=${API_URL}
