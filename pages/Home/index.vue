@@ -143,9 +143,11 @@
 .wrapper-content {
     max-height: 36rem;
     overflow: scroll;
-    scroll-snap-align: end;
-    scroll-behavior: smooth;
+    overflow: scroll;
     scroll-snap-type: y mandatory;
+}
+.wrapper-content > div:last-child {
+    scroll-snap-align: start;
 }
 .wrapper-index .title.text-light-green {
     padding-right: 17px;
