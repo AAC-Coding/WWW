@@ -63,7 +63,7 @@
     border-top-right-radius: 76px;
     border-top-left-radius: 76px;
     position: absolute;
-    top: 60rem;
+    top: 100vh;;
 }
 .footer a{
     color: var(--light-green)
