@@ -303,4 +303,13 @@
     opacity: 50%;
   }
 }
+@media(min-width: 2000px) {
+    .wrapper-index .wrapper-title {
+        width: 60rem;
+    }
+    .wrapper-historical-conversation {
+        width: 70rem;
+        height: 54.19rem;
+    }
+}
 </style>
