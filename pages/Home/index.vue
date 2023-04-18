@@ -8,6 +8,7 @@
     let isWaiting = ref(false)
     let isLoading = ref(true)
     let firstInitialChatRequest = ref([])
+    let oldValue = 0;
     onMounted(async () => {
         const data = await homePageService.get_initial_chat()
         const {text, token} = data
@@ -20,8 +21,16 @@
         nextTick(() => {
             typing()
         });
-       
+        addEventListener("scroll", (event) => fireScroll(event))
     })
+
+    const fireScroll = (event) => {
+        const newValue = window.pageYOffset;
+        if(oldValue - newValue < 0){
+            // window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant'}) 
+        }
+        oldValue = newValue;
+    }
     const sleep = () => {
         return new Promise((resolve) => setTimeout(resolve, 30))
     }
@@ -46,7 +55,6 @@
             const responseFromChatbot = await homePageService.post_message(data)
             conversation.value.push({chatbot: responseFromChatbot.text}) 
             isWaiting.value = false
-            
         }
     }
 </script>
@@ -82,20 +90,29 @@
                 >
                 </textarea>
                 <div 
-                    class="wrapper-send-icon d-flex align-items-center mt-3 ps-2" 
+                    class="wrapper-send-icon d-flex align-items-start mt-3 ps-2" 
                     @click="submit"
                 >
-                    <img :src="sendIcon" alt="send-icon-principla">
+                    <img 
+                        alt="send-icon-principal"
+                        class="pt-2"
+                        :src="sendIcon" 
+                    >
                 </div>
             </div>
         </div>
-        <div v-else-if = "conversation.length > 1 && !isLoading" class="wrapper-historical-conversation pe-4 ps-4 pt-3 pb-3 d-flex flex-column justify-content-end overflow-scroll">
-            <div class="wrapper-content">
-                <div v-for = "(message, index) in conversation" :key="index">
+        <div 
+            v-else-if = "conversation.length > 1 && !isLoading"
+            class="wrapper-historical-conversation pe-4 ps-4 pt-3 pb-3 d-flex flex-column justify-content-end overflow-scroll">
+            <div :class="{'wrapper-content': true}">
+                <div 
+                    v-for = "(message, index) in conversation" 
+                    :key="index"
+                >
                         <h1 class="text-light-green d-flex justify-content-start">
                         {{message.chatbot}}
                         </h1>
-                        <h1 class="text-dark-green d-flex justify-content-end">
+                        <h1 class="text-dark-green d-flex justify-content-end text-end">
                             {{message.user}}
                         </h1>
 
@@ -116,14 +133,18 @@
                 >
                 </textarea>
                 <div 
-                    class="wrapper-send-icon d-flex align-items-end mt-3 ps-2" 
+                    class="wrapper-send-icon d-flex align-items-start mt-3 ps-2" 
                     @click="submit"
                 >
-                    <img id="logo" :src="sendIcon" alt="send-icon-principal-chat">
+                    <img  
+                        alt="send-icon-principal-chat"
+                        class="pt-2"
+                        :src="sendIcon" 
+                    >
                 </div>
             </div>
         </div>
-        <custom-footer/>
+        <custom-footer class="footer" id="footerTest"/>
     </div>
 
 </template>
@@ -137,12 +158,11 @@
     width: 45.6rem;
 }
 .wrapper-index .underline {
-    border: 2px solid var(--light-green);
+    border: 0.13rem solid var(--light-green);
     width: 100%;
 }
 .wrapper-content {
     max-height: 36rem;
-    overflow: scroll;
     overflow: scroll;
     scroll-snap-type: y mandatory;
 }
@@ -150,26 +170,26 @@
     scroll-snap-align: start;
 }
 .wrapper-index .title.text-light-green {
-    padding-right: 17px;
-    font-size: 40px;
-    /* animation: typing 2s steps(23), blink .5s step-end infinite alternate; */
-    /* width: 26ch; */
+    padding-right: 1.06rem;
+    font-size: 2.5rem;
 }
 .wrapper-index .blinking {
     animation: blink 1s infinite;
 }
 .wrapper-index .wrapper-question-input {
-    border-top: 2px solid var(--light-green)!important;
+    border-top: 0.13rem solid var(--light-green)!important;
 }
 .wrapper-index .wrapper-question-input textarea {
     overflow-x: hidden;
+    margin-top: 0.63rem;
+    padding-left: 0.31rem;
 }
 .wrapper-index .wrapper-question-input.first-mounted  {
     border: none!important;
 }
 .wrapper-index .wrapper-question-input.first-mounted textarea {
     border: none!important;
-    height: 65px;
+    height: 4.06rem;
 }
 .wrapper-index .wrapper-question-input textarea,  .wrapper-index .wrapper-question-input textarea::placeholder{
     background: transparent;
@@ -179,10 +199,9 @@
     font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     font-weight: 300;
-    font-size: 30px;
+    font-size: 1.88rem;
     height: 3rem;
-    padding-top: 10px;
-    /* padding: 10px; */
+    padding-left: 0.63rem;
 }
 .wrapper-index .wrapper-question-input .wrapper-send-icon {
     cursor: pointer;
@@ -192,27 +211,26 @@
     box-shadow: unset;
 }
 .wrapper-historical-conversation {
-    width: 768px;
-    height: 611px;
-    border: 3px solid var(--light-green);
-    border-radius: 29px;
+    width: 48rem;
+    height: 38.19rem;
+    border: 0.19rem solid var(--light-green);
+    border-radius: 1.81rem;
     overflow-y: auto;
     animation: zoom-in-zoom-out 1s ease;
 }
 .wrapper-historical-conversation h1 {
-    font-size: 30px;
+    font-size: 1.88rem;
 }
 .wrapper-historical-conversation .text-dark-green{
-    word-break: break-all;
-    margin-left: 113px;
+    margin-left: 7.06rem; 
 }
 .wrapper-historical-conversation .text-light-green {
-    margin-right: 113px; 
+    margin-right: 7.06rem; 
 }
 .jumping-dots-loader span {
     display: inline-block;
-    width: 10px;
-    height: 10px;
+    width: 0.63rem;
+    height: 0.63rem;
     border-radius: 100%;
     background-color: var(--light-green)
  }
@@ -266,17 +284,16 @@
     .wrapper-index .wrapper-question-input textarea::placeholder,
     .wrapper-historical-conversation .text-light-green, 
     .wrapper-historical-conversation .text-dark-green {
-        font-size: 19px;
+        font-size: 1.19rem;
     }
     .wrapper-index .underline{
-        border: 2px solid var(--light-green);
+        border: 0.13rem solid var(--light-green);
         width: 21rem;
     }
     .wrapper-historical-conversation {
         width: 22rem;
         height: 29rem;
     }
-
 }
 @keyframes blink {
   0% {

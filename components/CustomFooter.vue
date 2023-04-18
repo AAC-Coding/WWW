@@ -42,7 +42,7 @@
                 <nuxt-link class="nav-link" > Site Map </nuxt-link>
             </div>
             <div class="col-lg-3">
-                <nuxt-link class="nav-link" > Whatssap </nuxt-link>
+                <nuxt-link class="nav-link" > Whatsapp </nuxt-link>
             </div>
         </div>
         <div class="row align-items-start">
@@ -76,5 +76,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.footer .row.align-items-start {
+    width: inherit;
 }
 </style>
