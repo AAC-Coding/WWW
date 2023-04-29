@@ -21,16 +21,7 @@
         nextTick(() => {
             typing()
         });
-        addEventListener("scroll", (event) => fireScroll(event))
     })
-
-    const fireScroll = (event) => {
-        const newValue = window.pageYOffset;
-        if(oldValue - newValue < 0){
-            // window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant'}) 
-        }
-        oldValue = newValue;
-    }
     const sleep = () => {
         return new Promise((resolve) => setTimeout(resolve, 30))
     }
@@ -38,8 +29,10 @@
         const text = conversation.value[0].chatbot
         for(let i=0; i<text.length; i++) {
             const container = document.getElementsByClassName('typewriter')[0];
-            container.innerHTML += text[i]
-            await sleep()
+            if(container) {
+                container.innerHTML += text[i]
+                await sleep()
+            }
         }
     }
     const submit = async() => {
@@ -62,10 +55,7 @@
     <div  class="wrapper-index d-flex justify-content-center align-items-center flex-column">
         <div v-if="isLoading" class="overlay">
             <div class="d-flex justify-content-center">  
-                <div
-                    class="jumping-dots-loader mb-3"> 
-                    <span></span> <span></span> <span></span> 
-                </div>
+                <jumping-dots/>
             </div>
         </div>
             <div 
@@ -109,19 +99,15 @@
                     v-for = "(message, index) in conversation" 
                     :key="index"
                 >
-                        <h1 class="text-light-green d-flex justify-content-start">
-                        {{message.chatbot}}
-                        </h1>
-                        <h1 class="text-dark-green d-flex justify-content-end text-end">
-                            {{message.user}}
-                        </h1>
+                    <h1 v-if = "message.chatbot" class="text-light-green d-flex justify-content-start">
+                    {{message.chatbot}}
+                    </h1>
+                    <h1 v-else class="text-dark-green d-flex justify-content-end text-end">
+                        {{message.user}}
+                    </h1>
 
-                    </div>    
-                <div
-                    v-if = "isWaiting" 
-                    class="jumping-dots-loader mb-3"> 
-                    <span></span> <span></span> <span></span> 
-                </div>
+                </div>    
+                <jumping-dots v-if = "isWaiting" />
             </div>
              <div 
                 class="wrapper-question-input d-flex justify-content-center w-100">
@@ -164,7 +150,7 @@
 .wrapper-content {
     max-height: 36rem;
     overflow: scroll;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
 }
 .wrapper-content > div:last-child {
     scroll-snap-align: start;
@@ -227,43 +213,6 @@
 .wrapper-historical-conversation .text-light-green {
     margin-right: 7.06rem; 
 }
-.jumping-dots-loader span {
-    display: inline-block;
-    width: 0.63rem;
-    height: 0.63rem;
-    border-radius: 100%;
-    background-color: var(--light-green)
- }
-
- .jumping-dots-loader span:nth-child(1) {
-     animation: bounce 1s ease-in-out infinite
- }
-
- .jumping-dots-loader span:nth-child(2) {
-     animation: bounce 1s ease-in-out 0.33s infinite
- }
-
- .jumping-dots-loader span:nth-child(3) {
-     animation: bounce 1s ease-in-out 0.66s infinite
- }
-
- @keyframes bounce {
-    0%,
-    75%,
-    100% {
-        -webkit-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        transform: translateY(0)
-    }
-
-    25% {
-        -webkit-transform: translateY(-10px);
-        -ms-transform: translateY(-10px);
-        -o-transform: translateY(-10px);
-        transform: translateY(-10px)
-    }
- }
 @keyframes zoom-in-zoom-out {
   0% {
     transform: scale(0, 0);
