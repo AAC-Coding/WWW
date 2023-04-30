@@ -1,10 +1,11 @@
 export default {
-    async get_initial_chat() {
+    async get_initial_chat(token) {
         const config = useRuntimeConfig()
         return await $fetch(`${config.public.apiBase}/api/chat/initial`, {
             method: 'GET',
             headers: {
-                'X-API-KEY': config.public.key
+                'X-API-KEY': config.public.key,
+                'Authorization': `Beare ${token}`
             }
         })
     },

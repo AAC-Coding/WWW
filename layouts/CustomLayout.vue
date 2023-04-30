@@ -92,5 +92,6 @@
 <style scoped>
 .slot {
     height: 90vh;
+    overflow: scroll;
 }
 </style>

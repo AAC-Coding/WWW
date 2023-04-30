@@ -10,7 +10,8 @@
     let firstInitialChatRequest = ref([])
     let oldValue = 0;
     onMounted(async () => {
-        const data = await homePageService.get_initial_chat()
+        const getTokenFromLocalStorage = localStorage.getItem('token')
+        const data = await homePageService.get_initial_chat(getTokenFromLocalStorage)
         const {text, token} = data
         conversation.value.push({chatbot: text})
         localStorage.setItem('user_id', token)
