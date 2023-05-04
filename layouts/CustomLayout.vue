@@ -1,12 +1,17 @@
 <script setup>
     import {ref} from 'vue'
     let addBorder = ref(false)
+    let navbar = ref(null)
+    defineExpose({
+        navbar
+    })
 </script>
 <template>
     <div>
         <nav 
+            ref="navbar"
             :class="{
-                'default-layout navbar navbar-expand-lg bg-black pt-4 pb-4': true, 
+                'default-layout navbar fixed-top navbar-expand-lg bg-black pt-4 pb-4': true, 
                 'add-border': addBorder,
             }">
             <div class="container-fluid d-flex justify-content-center ps-5 pe-5">

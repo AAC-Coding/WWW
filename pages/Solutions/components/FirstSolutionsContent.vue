@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div class="first-solutions-content">
+    <div class="first-solutions-content w-100">
       <div class="row">
             <div class="col-lg-7 col-md-12 pe-0">
                 <h1 class="title text-white"> AI MULTILINGUAL CUSTOMER SERVICE. </h1>

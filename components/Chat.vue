@@ -1,4 +1,5 @@
 <script setup>
+    import chatIcon from "~/assets/images/chatIcon.png"
     import sendIcon from "~/assets/images/sendIcon.svg"
 
     import {ref, onMounted, nextTick} from 'vue'
@@ -18,23 +19,25 @@
     }
     const submit = async() => {
         if(question.value && !isWaiting.value) {
-            if(conversation.length == 8) {}
+            let data = {}
+            let responseFromChatbot = {}
             conversation.value.push({user: question.value})
             isWaiting.value = true
-            const data = {
+            data = {
                 user_id: localStorage.getItem('user_id'),
                 content: question.value
             }
             question.value = ""
             scrollBottom()
-            const responseFromChatbot = await homePageService.post_message(data)
+            responseFromChatbot = await homePageService.post_message(data)
             conversation.value.push({chatbot: responseFromChatbot.text}) 
             isWaiting.value = false
             scrollBottom()
         }
     }
     onMounted(async () => {
-        const data = await homePageService.get_initial_chat()
+        const getTokenFromLocalStorage = localStorage.getItem('token')
+        const data = await homePageService.get_initial_chat(getTokenFromLocalStorage)
         const {text, token} = data
         conversation.value.push({chatbot: text})
         localStorage.setItem('user_id', token)
@@ -44,10 +47,14 @@
 
 <template>
     <div class="chat">
-        <div class="chat-name p-2">
+        <div class="chat-name p-2 pe-4 ps-4">
             <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <img />
+                    <img 
+                        alt="chat-icon"
+                        class="chat-icon me-3" 
+                        :src = "chatIcon" 
+                    />
                     <h4 class="chat-name-text text-white m-0">
                         ALCA'S AI CUSTOMER SERVICE
                     </h4>
@@ -58,9 +65,9 @@
                 ></i>
             </div>
         </div>
-        <div class="p-3 wrapper-scroll">
-            <div class="scroll">
-                <div class="chat-conversation d-flex flex-column justify-content-end">
+        <div class="p-3 wrapper-scroll" @mouseover="$emit('onHover',true)" @mouseleave="$emit('onHover',false)">
+            <div class="scroll pe-2 ps-2">
+                <div class="chat-conversation">
                     <div 
                         v-for = "(message, index) in conversation" 
                         :key="index"
@@ -99,7 +106,7 @@
 
 <style>
 .chat {
-    width: 22.06rem;
+    width: 23.06rem;
     right: 10rem;
     bottom: 8rem;
     background-color: var(--light-green);
@@ -111,7 +118,7 @@
     height: 25rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 .chat .scroll {
     overflow-y: scroll;
@@ -120,6 +127,13 @@
 }
 .chat .chat-conversation {
     height: inherit;
+}
+.chat .chat-icon {
+    background-color: white;
+    border-radius: 20px;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
 }
 .chat .chat-name-text {
     font-size: 1.2rem;
@@ -139,12 +153,43 @@
 }
 .chat .chat-conversation .chatbot {
     background: var(--dark-green);
+    position: relative;
+}
+.chat .chat-conversation .chatbot::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid transparent;
+    border-right: 15px solid var(--dark-green);
+    border-top: 15px solid var(--dark-green);
+    left: -0.7rem;
+    top: 0rem;
 }
 .chat .chat-conversation .user {
     background: var(--dirty-green);
     width: 18rem;
+    position: relative;
+    word-break: break-word;
 }
+.chat .chat-conversation .user::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 15px solid var(--dirty-green);
+    border-right: 15px solid transparent;
+    border-top: 15px solid var(--dirty-green);
+    right: -0.7rem;
+    top: 0rem;
+}
+
 .chat .wrapper-input img {
     cursor: pointer;
+}
+.chat .wrapper-input input:focus {
+    outline: none;
+    border-color: var(--dark-green);
+    box-shadow: unset;
 }
 </style>

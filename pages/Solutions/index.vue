@@ -1,44 +1,93 @@
 <script setup>
+
     import chatIcon from "~/assets/images/chatIcon.svg"
     import pageUp from "~/assets/images/pageUp.svg"
 
     import FirstSolutionsContent from "./components/FirstSolutionsContent"
     import SecondSolutionsContent from "./components/SecondSolutionsContent"
 
-    import {ref} from 'vue'
+    import {ref, onMounted, watch} from 'vue'
 
     definePageMeta({layout: 'custom-layout'})
 
+    const containerTest = ref(null)
+    const section1 = ref(null)
+    const section2 = ref(null)
+    const sections = [section1, section2]
+    const solutions = ref(null)
+    let currentSectionIndex = ref(0);
+    let isThrottled = false
+    let isHover = ref(false)
     let isShowChat = ref(false)
+
+
+    const handleOnWheel = (e) => {
+        e.preventDefault()
+        throttle(e, scrollHandler, 1000)
+    }
+    
+    const activeSection = (index) => {
+        sections[index].value?.scrollIntoView({ block: "start", behavior: "smooth"});
+    }
+
+    const throttle = (e, func, limit) => {
+        if (!isThrottled) {
+            func(e);
+            isThrottled = true;
+            setTimeout(function() {
+            isThrottled = false;
+            }, limit);
+        }
+    }
+
+    const scrollHandler = (event) => {
+        if (event.deltaY !== undefined && event.deltaY < 0) {
+            currentSectionIndex.value--;
+        } else if (event.deltaY !== undefined && event.deltaY > 0) {
+            currentSectionIndex.value++;
+        }
+        if (currentSectionIndex.value < 0) {
+            currentSectionIndex.value = 0;
+        } else if (currentSectionIndex.value > sections.length - 1) {
+            currentSectionIndex.value = sections.length - 1;
+        }
+        sections[currentSectionIndex.value]?.value?.scrollIntoView({ block: "start", behavior: "smooth"});
+        currentSectionIndex.value == 0 ? window.scrollBy(0, -5000) : null
+    }
+
+    watch(isHover, () => {
+        if(isHover.value ) {
+            document.removeEventListener('wheel',handleOnWheel)
+        }
+        else  {
+          document.addEventListener('wheel', handleOnWheel, {passive: false});
+        }
+    })
+    onMounted(() => {
+      document.addEventListener('wheel', handleOnWheel, {passive: false});
+    })
+
 </script>
 
 <template>
-    <div class="solutions ps-5 pe-5 position-relative">
-        <div class="d-flex align-items-center h-100">
-        <button 
-            type="button"
-            class="quote-button btn text-white position-absolute"
-        > 
-            GET QUOTE 
-        </button>    
-        <div id="carouselExampleCaptions" class="carousel slide w-100 position-relative vertical" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"
-                data-bs-interval="2000"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 1"
-                data-bs-interval="2000"></button>
+    <div class="solutions  position-relative" ref="solutions">
+        <section class="vh-100 pt-5 ps-5 pe-5 d-flex align-items-center " ref="section1">
+          <first-solutions-content/>
+        </section>
+        <section class="vh-100 d-flex align-items-center background-black ps-5 pe-5" ref="section2">
+          <second-solutions-content/>
+        </section>
+        <div class="wrapper-buttons position-fixed">
+             <div 
+                v-for = "(_, index) in sections"
+                class="active-section-button mb-4"
+                :key="index" 
+                @click="activeSection(index)"
+            >
+                <span :class="{active:currentSectionIndex == index, inactive: currentSectionIndex !== index}"></span>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <first-solutions-content/>
-                </div>
-                <div class="carousel-item ">
-                    <second-solutions-content/>
-                </div>
-            </div>
-           
         </div>
-         <div class="wrapper-action-buttons position-absolute d-flex justify-content-end">
+         <div class="wrapper-action-buttons position-fixed d-flex justify-content-end">
             <img
                 alt="chatIcon"
                 class="me-2"
@@ -46,23 +95,23 @@
                 @click="isShowChat = !isShowChat"
             />
             <img
-                alt="chatIcon"
+                alt="pageUp"
                 :src="pageUp"
+                @click="activeSection(0)"
             />
         </div>
         <chat 
-            v-if = "isShowChat"
-            class="position-absolute"
+            v-show = "isShowChat"
+            class="position-fixed"
             @isShowChat = "isShowChat = !isShowChat"
+            @onHover = "isHover = $event"
         />
-        </div>
     </div>
 </template>
 
 <style scoped>
 .solutions {
     background-color: #263F37;
-    height: inherit;
 }
 .solutions .quote-button {
     background-color: var(--light-green);
@@ -70,26 +119,6 @@
     top: 4rem;
     font-size: 1.63rem;
     right: 6rem;
-}
-.solutions .carousel-inner {
-    overflow: visible;
-}
-.solutions .carousel-indicators {
-    flex-direction: column;
-    bottom: unset;
-    top: 11rem;
-    left: 95%;
-    margin: 0rem;
-    width: 2rem;
-}
-.solutions .carousel-indicators button {
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 100%;  
-    background-color: var(--dark-green);
-}
-.solutions .carousel-indicators .active {
-    background-color: white
 }
 .solutions div#carouselExampleCaptions {
     position: relative;
@@ -101,6 +130,25 @@
 .solutions .wrapper-action-buttons img{
     cursor: pointer;
 }
-
-
+.solutions .active, .solutions .inactive{
+    display: block;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 10rem;
+    background-color: var(--dark-green);
+}
+.solutions .inactive{
+    background-color: white;
+    
+}
+.solutions .wrapper-buttons {
+    top: 15rem;
+    right: 8rem;
+}
+.solutions .background-black {
+    background-color: black;
+}
+.solutions .active-section-button  {
+    cursor: pointer;
+}
 </style>

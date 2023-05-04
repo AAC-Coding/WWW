@@ -16,6 +16,9 @@ declare global {
   const defineNuxtPlugin: typeof import('../../node_modules/nuxt/dist/app')['defineNuxtPlugin']
   const defineNuxtRouteMiddleware: typeof import('../../node_modules/nuxt/dist/app')['defineNuxtRouteMiddleware']
   const definePageMeta: typeof import('../../node_modules/nuxt/dist/pages/runtime/composables')['definePageMeta']
+  const definePayloadPlugin: typeof import('../../node_modules/nuxt/dist/app')['definePayloadPlugin']
+  const definePayloadReducer: typeof import('../../node_modules/nuxt/dist/app')['definePayloadReducer']
+  const definePayloadReviver: typeof import('../../node_modules/nuxt/dist/app')['definePayloadReviver']
   const effect: typeof import('vue')['effect']
   const effectScope: typeof import('vue')['effectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
@@ -137,6 +140,9 @@ declare module 'vue' {
     readonly defineNuxtPlugin: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['defineNuxtPlugin']>
     readonly defineNuxtRouteMiddleware: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['defineNuxtRouteMiddleware']>
     readonly definePageMeta: UnwrapRef<typeof import('../../node_modules/nuxt/dist/pages/runtime/composables')['definePageMeta']>
+    readonly definePayloadPlugin: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['definePayloadPlugin']>
+    readonly definePayloadReducer: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['definePayloadReducer']>
+    readonly definePayloadReviver: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app')['definePayloadReviver']>
     readonly effect: UnwrapRef<typeof import('vue')['effect']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
