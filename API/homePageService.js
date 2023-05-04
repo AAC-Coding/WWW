@@ -16,7 +16,7 @@ export default {
                 'X-API-KEY': config.public.key
             },
             body: {
-                token: data.user_id,
+                token: data.token,
                 content: data.content
             }
         })

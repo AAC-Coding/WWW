@@ -14,7 +14,7 @@
         const data = await homePageService.get_initial_chat(getTokenFromLocalStorage)
         const {text, token} = data
         conversation.value.push({chatbot: text})
-        localStorage.setItem('user_id', token)
+        localStorage.setItem('token', token)
         isLoading.value = false
         
         firstInitialChatRequest.value.push(text.slice(0, 23))
@@ -42,7 +42,7 @@
             conversation.value.push({user: question.value})
             isWaiting.value = true
             const data = {
-                user_id: localStorage.getItem('user_id'),
+                token: localStorage.getItem('token'),
                 content: question.value
             }
             question.value = ""
