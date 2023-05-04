@@ -5,7 +5,6 @@ export default defineNuxtConfig({
             "~": "/<rootDir>",
             "@": "/<rootDir>",
             "bootstrap": "/<rootDir>/node_modules/bootstrap",
-            "test": "~/assets/images",
         }
     },
     target: 'static',
@@ -28,6 +27,9 @@ export default defineNuxtConfig({
         key: process.env["API_KEY"]
       }
     },
+    plugins: [
+      { src: '~/plugins/bootstrap-icons.js', mode: 'client' }
+    ],
     css: ["~/assets/main.css"],
     layouts: {
       path: 'layouts'
@@ -36,5 +38,6 @@ export default defineNuxtConfig({
       host: process.env.NUXT_HOST,
       port: process.env.NUXT_PORT,
     },
+    pages: true
     
 })

@@ -1,10 +1,19 @@
 <script setup>
     import {ref} from 'vue'
     let addBorder = ref(false)
+    let navbar = ref(null)
+    defineExpose({
+        navbar
+    })
 </script>
 <template>
     <div>
-        <nav :class="{'default-layout navbar navbar-expand-lg bg-black pt-4 pb-4': true, 'add-border': addBorder}">
+        <nav 
+            ref="navbar"
+            :class="{
+                'default-layout navbar fixed-top navbar-expand-lg bg-black pt-4 pb-4': true, 
+                'add-border': addBorder,
+            }">
             <div class="container-fluid d-flex justify-content-center ps-5 pe-5">
                 <nuxt-link class="navbar-brand" href="#">
                 <div class="">
@@ -46,22 +55,35 @@
                 >
                 <ul class="navbar-nav">
                     <li class="nav-item me-2">
-                    <nuxt-link 
-                        class="nav-link active" 
-                        aria-current="page" 
-                        to="/"
-                    > 
-                        HOME 
-                    </nuxt-link>
+                        <nuxt-link 
+                            aria-current="page" 
+                            to="/home"
+                            :class="{'nav-link': true, active: $route.path === '/home'}"
+                        > 
+                            HOME 
+                        </nuxt-link>
                     </li>
                     <li class="nav-item me-2">
-                    <nuxt-link class="nav-link" to="/" > SOLUTIONS </nuxt-link>
+                        <nuxt-link 
+                            to="/solutions" 
+                            :class="{'nav-link': true, active: $route.path === '/solutions'}"
+                        > 
+                            SOLUTIONS 
+                        </nuxt-link>
                     </li>
                     <li class="nav-item me-2">
-                    <nuxt-link class="nav-link"> BLOG </nuxt-link>
+                        <nuxt-link 
+                            :class="{'nav-link': true, active: $route.path === '/blog'}"
+                        > 
+                            BLOG 
+                        </nuxt-link>
                     </li>
                     <li class="nav-item">
-                    <nuxt-link class="nav-link"> CONTACT </nuxt-link>
+                    <nuxt-link 
+                        :class="{'nav-link': true, active: $route.path === '/contact'}"
+                    > 
+                        CONTACT
+                    </nuxt-link>
                     </li>
                 </ul>
                 </div>
@@ -74,6 +96,6 @@
 </template>
 <style scoped>
 .slot {
-    height: 100vh;
+    height: 90vh;
 }
 </style>
