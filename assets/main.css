@@ -20,6 +20,9 @@ body {
 .text-dark-green {
   color: var(--dark-green);
 }
+.default-layout.navbar {
+  border-bottom: 1px solid var(--dull-green);
+}
 .default-layout .nav-link.active {
   color: var(--light-green);
 }

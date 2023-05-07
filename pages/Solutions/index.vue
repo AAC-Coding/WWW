@@ -79,10 +79,10 @@
         > 
             GET A QUOTE 
         </button>
-        <section class="vh-100 pt-5 ps-5 pe-5 d-flex align-items-center " ref="section1">
+        <section class="vh-100 pt-5 ps-5 pe-5 d-flex background-black align-items-center " ref="section1">
           <first-solutions-content/>
         </section>
-        <section class="vh-100 d-flex align-items-center background-black ps-5 pe-5" ref="section2">
+        <section class="vh-100 d-flex align-items-center ps-5 pe-5" ref="section2">
           <second-solutions-content/>
         </section>
         <div class="wrapper-buttons position-fixed">
