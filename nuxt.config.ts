@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         }
     },
     target: 'static',
+    ssr: true,
     app: {
         head: {
           title: "ALCA AI",
