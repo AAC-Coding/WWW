@@ -74,23 +74,4 @@
         left: 9rem;
         top: 2rem;
     }
-    /* .social-media .facebook-arrow-image {
-        top: 6.4rem;
-        left: 3rem;
-    }
-    .social-media .facebook-icon{
-        top: 2.1rem;
-        left: 6rem;
-    }
-    .social-media .instagram-icon {
-        top: 2rem;
-        left: 4rem;
-    }
-    .social-media .whatsapp-arrow-image {
-        padding-top: 5rem;
-    }
-    .social-media .whatsapp-icon{
-        top: 2rem;
-        right: 3rem;
-    } */
 </style>

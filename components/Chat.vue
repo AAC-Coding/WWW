@@ -24,7 +24,7 @@
             conversation.value.push({user: question.value})
             isWaiting.value = true
             data = {
-                user_id: localStorage.getItem('user_id'),
+                token: localStorage.getItem('token'),
                 content: question.value
             }
             question.value = ""
@@ -40,7 +40,7 @@
         const data = await homePageService.get_initial_chat(getTokenFromLocalStorage)
         const {text, token} = data
         conversation.value.push({chatbot: text})
-        localStorage.setItem('user_id', token)
+        localStorage.setItem('token', token)
         isWaiting.value = false
     })
 </script>
@@ -122,7 +122,7 @@
 }
 .chat .scroll {
     overflow-y: scroll;
-   
+    overflow-x: hidden;
     max-height: 20rem;
 }
 .chat .chat-conversation {
@@ -191,5 +191,28 @@
     outline: none;
     border-color: var(--dark-green);
     box-shadow: unset;
+}
+@media(max-width: 1077px) {
+    .chat {
+        width: 19.06rem;
+        right: 1rem;
+        bottom: 3rem;
+    }
+    .chat .chat-name {
+        padding-left: 1rem!important;
+    }
+    .chat .chat-name-text {
+        font-size: 1rem;
+    }
+    .chat .wrapper-input .form-control, .chat .chat-conversation h1 {
+        font-size: 0.8rem!important;
+    }
+    .chat .chat-icon {
+        width: 2rem;
+        height: 2rem;
+    }
+    .chat .wrapper-input img {
+        width: 2rem;
+    }
 }
 </style>

@@ -42,4 +42,10 @@
         transform: translateY(-10px)
     }
  }
+ @media(max-width: 1077px) {
+    .jumping-dots-loader span {
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+ }
 </style>
