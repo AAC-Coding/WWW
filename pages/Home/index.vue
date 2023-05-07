@@ -141,6 +141,7 @@
     /* height: 90%; */
     height: 90vh;
     padding-top: 12rem;
+    overflow-x: hidden;
 }
 .wrapper-index .wrapper-title {
     width: 45.6rem;
@@ -153,6 +154,7 @@
     max-height: 36rem;
     overflow: scroll;
     scroll-snap-type: none;
+    overflow-x: hidden;
 }
 .wrapper-content > div:last-child {
     scroll-snap-align: start;
