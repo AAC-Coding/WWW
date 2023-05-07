@@ -5,7 +5,7 @@
 <template>
     <div class="second-solutions-content w-100">
       <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 wrapper-image">
                 <img 
                     class="suprise-robot pt-5"
                     :src = "surpriseRobot"
@@ -49,6 +49,29 @@
     .second-solutions-content h4 {
         font-size: 2.5rem;
     }
+}
+
+@media(max-width: 1077px) {
+    .second-solutions-content {
+        margin-bottom: 5rem;
+    }
+    .second-solutions-content .suprise-robot {
+        width: 15rem;
+    }
+    .second-solutions-content .title {
+        display: none;
+    }
+    .second-solutions-content .wrapper-image {
+        display: flex;
+        justify-content: center;
+    }
+    .second-solutions-content h4, .second-solutions-content p {
+        text-align: start!important;
+    }
+    .second-solutions-content h4 {
+        font-size: 1.93rem;
+    }
+   
 }
 
 

@@ -224,7 +224,7 @@
   }
 }
 
-@media(max-width: 636px) {
+@media(max-width: 1077px) {
     .wrapper-index .wrapper-title {
         width: 20rem;
     }

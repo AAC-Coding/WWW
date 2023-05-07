@@ -64,13 +64,21 @@
         }
     })
     onMounted(() => {
-      document.addEventListener('wheel', handleOnWheel, {passive: false});
+      if (!/Mobi/.test(navigator.userAgent)){
+        document.addEventListener('wheel', handleOnWheel, {passive: false});
+      }
     })
 
 </script>
 
 <template>
     <div class="solutions  position-relative" ref="solutions">
+        <button  
+            type="button" 
+            class="quote-button btn text-white position-fixed"
+        > 
+            GET A QUOTE 
+        </button>
         <section class="vh-100 pt-5 ps-5 pe-5 d-flex align-items-center " ref="section1">
           <first-solutions-content/>
         </section>
@@ -111,14 +119,13 @@
 
 <style scoped>
 .solutions {
-    background-color: #263F37;
+    background-color: var(--dull-green);
 }
 .solutions .quote-button {
     background-color: var(--light-green);
-    /* right: 11rem; */
-    top: 4rem;
+    right: 4rem;
+    top: 10rem;
     font-size: 1.63rem;
-    right: 6rem;
 }
 .solutions div#carouselExampleCaptions {
     position: relative;
@@ -150,5 +157,35 @@
 }
 .solutions .active-section-button  {
     cursor: pointer;
+}
+
+@media(max-width: 1077px) {
+    .solutions {
+        padding-top: 3rem;
+    }
+    .solutions .wrapper-buttons {
+        display: none;
+    }
+    .solutions section {
+        padding-left: 2.8rem!important;
+        padding-right: 2.8rem!important;
+        height: unset!important;
+    }
+    .solutions .wrapper-action-buttons img:nth-child(2) {
+        display: none;
+    }
+    .solutions .background-black {
+        background-color: var(--dull-green);
+    }
+    .solutions .wrapper-action-buttons {
+        right: 0rem;
+        bottom: 1rem;
+    }
+    .solutions .wrapper-action-buttons img {
+        width: 2rem;
+    }
+    .solutions .quote-button {
+        display: none;
+    }
 }
 </style>
