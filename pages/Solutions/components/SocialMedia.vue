@@ -4,6 +4,14 @@
     import arrowTopLeft from "@/assets/images/arrowTopLeft.png"
     import arrowTopRight from "@/assets/images/arrowTopRight.png"
     import arrowRight from "@/assets/images/arrowRight.png"
+
+    const link = () => {
+        console.log('ME ESTOY EJECUTANDO')
+        var link = document.createElement('a');
+        link.href = "https://api.whatsapp.com/send?phone=13052041810";
+        link.target = '_blank'
+        window.open(link)
+    }
 </script>
 <template>
     <div class="social-media d-flex flex-column align-items-center position-relative">
@@ -17,7 +25,7 @@
                 <img class="instagram-arrow-image position-absolute" :src="arrowTopLeft"/>
             </div>
             <div class="d-grid position-relative">
-                <i class="whatsapp-icon bi bi-whatsapp position-absolute"></i>
+                <i class="whatsapp-icon bi bi-whatsapp position-absolute" @click="link"></i>
                 <img class="whatsapp-arrow-image position-absolute" :src="arrowTopRight"/>
             </div>
             <div class="d-grid position-relative">
@@ -65,6 +73,7 @@
     .social-media .whatsapp-icon {
         left: 1rem;
         top: 2rem;
+        z-index: 1;
     }
     .social-media .messenger-arrow-image {
         left: 10.9rem;

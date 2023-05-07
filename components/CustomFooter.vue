@@ -42,7 +42,13 @@
                 <nuxt-link class="nav-link" > Site Map </nuxt-link>
             </div>
             <div class="col-lg-3">
-                <nuxt-link class="nav-link" > Whatsapp </nuxt-link>
+                <a 
+                    class="nav-link"
+                    href="https://api.whatsapp.com/send?phone=13052041810"
+                    target="_blank"
+                > 
+                    Whatsapp 
+                </a>
             </div>
         </div>
         <div class="row align-items-start">
