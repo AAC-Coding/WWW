@@ -73,6 +73,7 @@
                     </li>
                     <li class="nav-item me-2">
                         <nuxt-link 
+                            to="/solutions" 
                             :class="{'nav-link': true, active: $route.path === '/blog'}"
                         > 
                             BLOG 
@@ -80,6 +81,7 @@
                     </li>
                     <li class="nav-item">
                     <nuxt-link 
+                        to="/contact" 
                         :class="{'nav-link': true, active: $route.path === '/contact'}"
                     > 
                         CONTACT
