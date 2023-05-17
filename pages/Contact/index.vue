@@ -15,7 +15,7 @@
 
 <template>
     <div class="contact d-flex flex-column align-items-center justify-content-center">
-        <div class="d-flex justify-content-center">
+        <div class="wrapper-contact-card d-flex justify-content-center">
             <div class="d-flex flex-column align-items-center me-5">
                 <img 
                     class="mb-5"
@@ -53,10 +53,10 @@
                 </contact-card>
             </div>
         </div>
-        <div class="d-flex justify-content-center mt-5">
+        <div class="wrapper-hr d-flex justify-content-center mt-5">
             <hr/>
         </div>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center pb-5">
             <img 
                 class="contact-icon  facebook-icon ps-5 me-5" 
                 :src="facebookIcon"
@@ -81,13 +81,65 @@
         font-weight: 400;
     }
     .contact hr{
-        border: 2px solid var(--dark-green);
-        opacity: 1;;
+        border: 1px solid var(--dark-green);
+        opacity: 1;
         width: 40rem;
     }
     .contact .contact-icon {
         cursor: pointer;
         font-size: 4.2rem;
         color: var(--light-green);
+    }
+    @media(max-width: 1077px) {
+        .contact {
+            padding-top: 23rem;
+        }
+        .contact .wrapper-contact-card {
+            flex-direction: column;
+            width: 16rem;
+        }
+        .contact .contact-card h4, .contact .contact-card p {
+            display: none;
+            margin-top: 0!important;
+            color: white;
+        }
+        .contact .contact-card h4:last-child {
+            display: unset;
+        }
+        .contact .contact-card {
+            background: transparent;
+            width: unset;
+            height: unset;
+            padding: 0;
+        }
+        .contact .wrapper-contact-card div {
+            margin-right: 0!important;
+            margin-bottom: 1.5rem;
+        }
+        .contact .wrapper-contact-card img {
+            margin-bottom: 1rem!important;
+        }
+        .contact .wrapper-hr {
+            margin-top: 0!important;
+            
+        }
+        .contact hr {
+            opacity: 1;
+            width: 17rem;
+        }
+        .contact .contact-icon.facebook-icon{
+            width: 4rem;
+            margin-right: 1rem!important;
+            padding-left: 0rem!important;
+            width: 1rem;
+        }
+        .contact .contact-icon {
+            font-size: 2rem;
+            margin-right: 2rem!important;
+        }
+        .contact .contact-icon:last-child {
+            margin-right: 0rem!important;
+        }
+
     }
 </style>

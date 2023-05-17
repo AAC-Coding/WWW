@@ -122,14 +122,8 @@
     right: 5rem;
     bottom: 4rem;
 }
-/* .wrapper-chat .message-icon {
-    right: 5rem;
-    bottom: 4rem;
-} */
 .chat {
     width: 23.06rem;
-    /* right: 10rem;
-    bottom: 8rem; */
     background-color: var(--light-green);
 }
 .chat .chat-name {
@@ -214,10 +208,13 @@
     box-shadow: unset;
 }
 @media(max-width: 1077px) {
-    .chat {
-        width: 19.06rem;
+    .wrapper-chat  {
         right: 1rem;
         bottom: 3rem;
+        z-index: 10000;
+    }
+    .chat {
+        width: 19.06rem;
     }
     .chat .chat-name {
         padding-left: 1rem!important;
