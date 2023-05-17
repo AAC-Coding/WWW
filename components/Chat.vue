@@ -1,4 +1,5 @@
 <script setup>
+    import messageIcon from "~/assets/images/chatIcon.svg"
     import chatIcon from "~/assets/images/chatIcon.png"
     import sendIcon from "~/assets/images/sendIcon.svg"
 
@@ -9,6 +10,7 @@
     let isWaiting = ref(true)
     let conversation = ref([])
     let question = ref("")
+    const isShowChat = ref(false)
 
     const scrollBottom = () => {
         nextTick(() => {
@@ -46,69 +48,88 @@
 </script>
 
 <template>
-    <div class="chat">
-        <div class="chat-name p-2 pe-4 ps-4">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-center">
-                    <img 
-                        alt="chat-icon"
-                        class="chat-icon me-3" 
-                        :src = "chatIcon" 
-                    />
-                    <h4 class="chat-name-text text-white m-0">
-                        ALCA'S AI CUSTOMER SERVICE
-                    </h4>
-                </div>
-                <i 
-                    class="close-chat bi bi-x"
-                    @click="$emit('isShowChat')"
-                ></i>
-            </div>
-        </div>
-        <div class="p-3 wrapper-scroll" @mouseover="$emit('onHover',true)" @mouseleave="$emit('onHover',false)">
-            <div class="scroll pe-2 ps-2">
-                <div class="chat-conversation">
-                    <div 
-                        v-for = "(message, index) in conversation" 
-                        :key="index"
-                    >
-                        <h1 :tabIndex = "index" v-if = "message.chatbot" class="chatbot text-white d-flex justify-content-start">
-                        {{message.chatbot}}
-                        </h1>
-                        <div  v-else class="wrapper-user d-flex justify-content-end">
-                            <h1  class="user text-white d-flex justify-content-end text-end">
-                                {{message.user}}
-                            </h1>
-                        </div>
-                        
 
-                    </div>    
-                    <jumping-dots v-if = "isWaiting"/>
+    <div class="wrapper-chat position-fixed d-flex flex-column align-items-end">
+        <div 
+            class="chat"
+            v-if = "isShowChat">
+            <div 
+                class="chat-name p-2 pe-4 ps-4">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img 
+                            alt="chat-icon"
+                            class="chat-icon me-3" 
+                            :src = "chatIcon" 
+                        />
+                        <h4 class="chat-name-text text-white m-0">
+                            ALCA'S AI CUSTOMER SERVICE
+                        </h4>
+                    </div>
+                    <i 
+                        class="close-chat bi bi-x"
+                        @click="isShowChat = !isShowChat"
+                    ></i>
                 </div>
             </div>
-            <div class="d-flex wrapper-input">
-                <input 
-                    v-model="question"
-                    placeholder="Type here your question"
-                    type="text"
-                    class="form-control me-2"
-                    @keyup.enter="submit"
-                />
-                <img
-                    :src = "sendIcon"
-                    @click="submit"
-                />
+            <div class="p-3 wrapper-scroll" @mouseover="$emit('onHover',true)" @mouseleave="$emit('onHover',false)">
+                <div class="scroll pe-2 ps-2">
+                    <div class="chat-conversation">
+                        <div 
+                            v-for = "(message, index) in conversation" 
+                            :key="index"
+                        >
+                            <h1 :tabIndex = "index" v-if = "message.chatbot" class="chatbot text-white d-flex justify-content-start">
+                            {{message.chatbot}}
+                            </h1>
+                            <div  v-else class="wrapper-user d-flex justify-content-end">
+                                <h1  class="user text-white d-flex justify-content-end text-end">
+                                    {{message.user}}
+                                </h1>
+                            </div>
+                            
+
+                        </div>    
+                        <jumping-dots v-if = "isWaiting"/>
+                    </div>
+                </div>
+                <div class="d-flex wrapper-input">
+                    <input 
+                        v-model="question"
+                        placeholder="Type here your question"
+                        type="text"
+                        class="form-control me-2"
+                        @keyup.enter="submit"
+                    />
+                    <img
+                        :src = "sendIcon"
+                        @click="submit"
+                    />
+                </div>
             </div>
         </div>
-       
-    </div>
+            <img
+                alt="chatIcon"
+                class="message-icon mt-2"
+                :src="messageIcon"
+                @click="isShowChat = !isShowChat"
+            />
+     </div>
 </template>
 
 <style>
+.wrapper-chat {
+    right: 5rem;
+    bottom: 4rem;
+}
+/* .wrapper-chat .message-icon {
+    right: 5rem;
+    bottom: 4rem;
+} */
 .chat {
     width: 23.06rem;
-    right: 10rem;
-    bottom: 8rem;
+    /* right: 10rem;
+    bottom: 8rem; */
     background-color: var(--light-green);
 }
 .chat .chat-name {

@@ -6,8 +6,7 @@
     import arrowRight from "@/assets/images/arrowRight.png"
 
     const link = () => {
-        console.log('ME ESTOY EJECUTANDO')
-        var link = document.createElement('a');
+        let link = document.createElement('a');
         link.href = "https://api.whatsapp.com/send?phone=13052041810";
         link.target = '_blank'
         window.open(link)

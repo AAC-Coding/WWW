@@ -95,31 +95,39 @@
                 <span :class="{active:currentSectionIndex == index, inactive: currentSectionIndex !== index}"></span>
             </div>
         </div>
-         <div class="wrapper-action-buttons position-fixed d-flex justify-content-end">
-            <img
+        <div class="wrapper-action-buttons position-fixed d-flex justify-content-end">
+            <!-- <img
                 alt="chatIcon"
                 class="me-2"
                 :src="chatIcon"
                 @click="isShowChat = !isShowChat"
-            />
+            /> -->
+
             <img
                 alt="pageUp"
                 :src="pageUp"
                 @click="activeSection(0)"
             />
         </div>
-        <chat 
-            v-show = "isShowChat"
-            class="position-fixed"
-            @isShowChat = "isShowChat = !isShowChat"
-            @onHover = "isHover = $event"
-        />
+        <div class="position-relative">
+            <chat 
+                class="solutions-chat "
+                @onHover = "isHover = $event"
+            />
+        </div>
+        
     </div>
 </template>
 
 <style scoped>
 .solutions {
     background-color: var(--dull-green);
+}
+.solutions .solutions-chat :deep(.message-icon){
+    right: 9rem!important;
+}
+.solutions .wrapper-chat {
+    right: 9rem;
 }
 .solutions .quote-button {
     background-color: var(--light-green);
