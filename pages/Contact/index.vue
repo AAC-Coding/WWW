@@ -11,6 +11,7 @@
         link.target = '_blank'
         window.open(link)
     }
+    const isOpenChat = ref(false)
 </script>
 
 <template>
@@ -37,7 +38,7 @@
                     <p class="text-center">
                         Our artificial intelligence is fully trained to help, inform and be able to do anything a human can do.
                     </p>
-                    <h4 class="text-dark-green"> Chat here </h4>
+                    <h4 class="chat-here-text text-dark-green" @click="isOpenChat = !isOpenChat"> Chat here </h4>
                 </contact-card>
             </div>
             <div class="d-flex flex-column align-items-center">
@@ -66,7 +67,10 @@
             <i class="contact-icon bi bi-whatsapp me-5" @click="link('https://api.whatsapp.com/send?phone=13052041810')"></i>
             <i class="contact-icon bi bi-messenger me-5"></i>
         </div>
-        <chat/>
+        <chat
+            :isOpenChat = "isOpenChat"
+            @onModifyOpenChat = "isOpenChat = $event"
+        />
     </div>
     
 </template>
@@ -89,6 +93,9 @@
         cursor: pointer;
         font-size: 4.2rem;
         color: var(--light-green);
+    }
+    .contact .contact-card .chat-here-text{
+        cursor: pointer;
     }
     @media(max-width: 1077px) {
         .contact {
