@@ -6,11 +6,15 @@
     import {ref, onMounted, nextTick} from 'vue'
 
     import homePageService from "@/API/homePageService"
+    defineProps({
+        isOpenChat: Boolean
+    })
 
     let isWaiting = ref(true)
     let conversation = ref([])
     let question = ref("")
     const isShowChat = ref(false)
+    const emit = defineEmits(['onModifyOpenChat'])
 
     const scrollBottom = () => {
         nextTick(() => {
@@ -37,6 +41,9 @@
             scrollBottom()
         }
     }
+    watch(isShowChat, async (val) => {
+         emit('onModifyOpenChat', val)
+    })
     onMounted(async () => {
         const getTokenFromLocalStorage = localStorage.getItem('token')
         const data = await homePageService.get_initial_chat(getTokenFromLocalStorage)
@@ -45,6 +52,7 @@
         localStorage.setItem('token', token)
         isWaiting.value = false
     })
+
 </script>
 
 <template>
@@ -52,7 +60,7 @@
     <div class="wrapper-chat position-fixed d-flex flex-column align-items-end">
         <div 
             class="chat"
-            v-if = "isShowChat">
+            v-if = "isShowChat || isOpenChat">
             <div 
                 class="chat-name p-2 pe-4 ps-4">
                 <div class="d-flex justify-content-between">
